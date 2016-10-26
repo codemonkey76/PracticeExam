@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10">
             <a class="btn btn-lg btn-primary" href="/exam" role="button">&lt;&lt; Back</a>
-            <h1>{{ $exam->exam_name }}</h1>
+            <h3>{{ $exam->exam_name }}</h3>
             <form method="POST" action="getOptions">
                 {{ csrf_field() }}
                 <select name="questions" size="10" style="width: 100%">
@@ -27,6 +27,7 @@
                 <div clas="form-group">
                         <button type="submit" class="btn btn-default">Add Question</button>
                 </div>
+                <a href="/exam/{{ $exam->id }}/practice" class="btn btn-lg btn-primary">Practice Exam</a>
             </form>
 
         </div>
