@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exam;
 use App\Answer;
+use App\Results;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,36 @@ class ExamsController extends Controller
         $exam = Exam::findOrFail($exam_id);
         return view('exam.model', compact('exam'));
     }
+    public function results($exam_id, Request $request)
+    {
+        //Store results against user id and exam id
+        $user_id = Auth::user()->id;
+        $exam = Exam::findOrFail($exam_id);
+
+        foreach ($exam->questions()->get() as $question)
+        {
+            $results = Results::where('user_id', '=', $user_id)
+                ->where('question_id', '=', $question->id)
+                ->first();
+            //dd($results);
+            if ($results == null)
+            {
+                $results = new Results;
+                $results->user_id = $user_id;
+                $results->question_id = $question->id;
+            }
+
+            if ($question->options()->count()==0)
+                $results->model_text = $request[$question->id];
+            else
+                $results->option_id = $request[$question->id];
+
+            //dd($results);
+            $results->save();
+        }
+        flash()->success('Success!', 'Submitted Results');
+        return redirect ('/');
+    }
     public function answers($exam_id, Request $request)
     {
         $exam = Exam::findOrFail($exam_id);
@@ -76,21 +107,18 @@ class ExamsController extends Controller
             if ($question->options()->get()->count()==0)
             {
                 // Store model text answer.
-                $question->answer()->save(new Answer([
-                    'model_text' => $request[$question->id]
-                    ]));
+                $question->model_text = $request[$question->id];
             }
             else
             {
                 // Store correct option.
-                $question->answer()->save(new Answer([
-                        'option_id' => $request[$question->id]
-                        ]));
+                $question->option_id =  $request[$question->id];
             }
-            
+            $question->save();
         }
-        flash()->success('Success!', 'Your flyer has been created.');
-        //Auth::user()->exams()->save(new Exam($request->all()));
-        return back();
+
+        flash()->success('Success!', 'Your answers have been submitted.');
+        
+        return redirect("/exam/$exam_id/question");
     }
 }

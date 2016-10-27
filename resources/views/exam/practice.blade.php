@@ -6,29 +6,45 @@
         <div class="col-md-10">
             <h3>{{ $exam->exam_name }}</h3>
             <form method="POST" action="results">
+                {{ csrf_field() }}
                 <?php
                     $index = 1;
                     $letters = range("a", "z");
-                    foreach ($exam->questions()->get()->shuffle() as $question)
+                    foreach ($exam->questions()->get() as $question)
                     {
-                        echo sprintf("<li>Q%s. %s</li>",
+                        echo "<p>";
+                        echo sprintf("<p>Q%s. %s</p>",
                                      $index,
                                      $question->questionText);
                         echo "<ul>";
-
-                        $index2 = 0;
-                        foreach ($question->options()->get()->shuffle() as $option)
+                        $results = App\Results::where('user_id', '=', Auth::user()->id)
+                            ->where('question_id','=',$question->id)->first();
+                        if ($question->options()->count()==0)
                         {
-                            // dd($option);
-                            echo sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\"> %s<br>",
-                                         $letters[$index2],
-                                         $option->question_id,
-                                         $option->id,
-                                         $option->option_text);
-                            $index2 += 1;
+                            echo "<textarea style=\"width: 500px\" name=\"$question->id\" rows=\"5\">";
+                            echo ($results!=null)?$results->model_text:"";
+                            echo "</textarea>";
                         }
-                        echo "</ul>";
-                        $index += 1;
+                        else
+                        {
+                            $index2 = 0;
+                            foreach ($question->options()->get() as $option)
+                            {
+                                //dd($results->option_id);
+                                $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
+                                             $letters[$index2],
+                                             $option->question_id,
+                                             $option->id,
+                                             ($results->option_id==$option->id)?"checked":"",
+                                             $option->option_text);
+                                // dd($output);
+                                echo $output;
+                                $index2 += 1;
+                            }
+                        }
+                            echo "</ul>";
+                            $index += 1;
+                            echo "</p>";
                     }
 
                 ?>

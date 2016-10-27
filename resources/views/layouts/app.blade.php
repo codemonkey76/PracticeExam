@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link href="/css/libs.css" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -82,6 +82,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="/js/libs.js"></script>
     @include('flash')
     <script src="/js/app.js"></script>
 </body>

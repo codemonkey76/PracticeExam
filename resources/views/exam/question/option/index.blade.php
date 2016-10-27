@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10">
             <h2><a href="/exam/{{ $exam->id }}/question">{{ $exam->exam_name }}</a></h2>
-            <h3>{{ $question->questionText }}</h3>
+            <p>{!! $question->questionText !!}</p>
             <select name="options" size="10" style="width: 100%">
                 @foreach ($question->options()->get() as $option)
                     <option value="{{ $option->id }}">{{ $option->option_text }}</option>
@@ -24,6 +24,8 @@
                     </div>
                 </form>
             @endif
+            <br><br>
+            <p><a href="/exam/{{ $exam->id }}/question/{{ $question->id+1 }}" class="btn btn-lg btn-primary">Next Question</a></p>
         </div>
     </div>
 </div>

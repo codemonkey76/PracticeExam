@@ -9,7 +9,7 @@ Route::get('contact', 'PagesController@contact');
 // Route::post('/createQuestions', 'QuestionsController@store');
 Auth::routes();
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
 
 
 /*
@@ -34,7 +34,7 @@ GET         /exam/{id}/question/{id}/edit     @edit
 PUT/PATCH   /exam/{id}/question/{id}          @update
 DELETE      /exam/{id}/question/{id}          @destroy
  */
-Route::resource('exam/{exam_id}/question', 'QuestionsController');
+Route::resource('/exam/{exam_id}/question', 'QuestionsController');
 Route::post('exam/{exam_id}/getOptions', 'QuestionsController@getOptions');
 
 
@@ -53,3 +53,4 @@ Route::get('/exam/{exam_id}/practice', 'ExamsController@practice');
 Route::get('/exam/{exam_id}/model', 'ExamsController@model');
 Route::post('/exam/{exam_id}/results', 'ExamsController@results');
 Route::post('/exam/{exam_id}/answers', 'ExamsController@answers');
+

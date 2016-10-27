@@ -21,18 +21,22 @@
                         
                         if ($question->options()->get()->count()==0)
                         {
-                            echo sprintf("<input type=\"text\" lines=\"5\" name=\"%s\"></input>", $question->id);
+                            echo sprintf("<input type=\"text\" rows=\"5\" name=\"%s\" value=\"%s\"></input>",
+                                         $question->id,
+                                         $question->model_text);
                         }
                         else
                         {
                             foreach ($question->options()->get()->shuffle() as $option)
                             {
                                 // dd($option);
-                                echo sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\"> %s<br>",
+                                echo sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
                                              $letters[$index2],
                                              $option->question_id,
                                              $option->id,
-                                             $option->option_text);
+                                             ($option->id==$question->option_id)?'checked':'',
+                                             $option->option_text
+                                             );
                                 $index2 += 1;
                             }
                         }
