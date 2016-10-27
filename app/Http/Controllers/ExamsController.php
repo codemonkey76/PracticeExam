@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exam;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamsController extends Controller
 {
@@ -37,8 +38,7 @@ class ExamsController extends Controller
 
     public function store(Request $request)
     {
-        $exam = new Exam($request->all());
-        $exam->save();
+        Auth::user()->exams()->save(new Exam($request->all()));
         return back();
     }
 
