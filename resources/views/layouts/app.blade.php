@@ -82,6 +82,7 @@
     </div>
 
     <!-- Scripts -->
+    @include('flash')
     <script src="/js/app.js"></script>
 </body>
 </html>

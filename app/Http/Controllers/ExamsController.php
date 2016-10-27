@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Answer;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,37 @@ class ExamsController extends Controller
     {
         $exam = Exam::findOrFail($exam_id);
         return view('exam.practice', compact('exam'));
-        
+    }
+
+    public function model($exam_id)
+    {
+        $exam = Exam::findOrFail($exam_id);
+        return view('exam.model', compact('exam'));
+    }
+    public function answers($exam_id, Request $request)
+    {
+        $exam = Exam::findOrFail($exam_id);
+        $questions = $exam->questions()->get();
+        foreach ($questions as $question)
+        {
+            if ($question->options()->get()->count()==0)
+            {
+                // Store model text answer.
+                $question->answer()->save(new Answer([
+                    'model_text' => $request[$question->id]
+                    ]));
+            }
+            else
+            {
+                // Store correct option.
+                $question->answer()->save(new Answer([
+                        'option_id' => $request[$question->id]
+                        ]));
+            }
+            
+        }
+        flash()->success('Success!', 'Your flyer has been created.');
+        //Auth::user()->exams()->save(new Exam($request->all()));
+        return back();
     }
 }

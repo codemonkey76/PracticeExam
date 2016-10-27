@@ -18,4 +18,8 @@ class Question extends Model
     {
         return $this->belongsTo('App\Exam');
     }
+    public function answer()
+    {
+        return $this->hasOne('App\Answer');
+    }
 }

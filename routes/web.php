@@ -50,3 +50,6 @@ DELETE      /exam/{id}/question/{id}/option/{id}          @destroy
 Route::resource('exam/{exam_id}/question/{question_id}/option', 'OptionsController');
 
 Route::get('/exam/{exam_id}/practice', 'ExamsController@practice');
+Route::get('/exam/{exam_id}/model', 'ExamsController@model');
+Route::post('/exam/{exam_id}/results', 'ExamsController@results');
+Route::post('/exam/{exam_id}/answers', 'ExamsController@answers');
