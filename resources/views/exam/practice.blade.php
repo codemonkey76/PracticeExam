@@ -31,13 +31,25 @@
                             foreach ($question->options()->get() as $option)
                             {
                                 //dd($results->option_id);
-                                $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
+                                //var_dump($option);
+                                //dd($results);
+                                if ($results==null)
+                                {
+                                    $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" > %s<br>",
+                                             $letters[$index2],
+                                             $option->question_id,
+                                             $option->id,
+                                             $option->option_text);
+                                }
+                                else
+                                {
+                                    $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
                                              $letters[$index2],
                                              $option->question_id,
                                              $option->id,
                                              ($results->option_id==$option->id)?"checked":"",
                                              $option->option_text);
-                                // dd($output);
+                                }
                                 echo $output;
                                 $index2 += 1;
                             }
