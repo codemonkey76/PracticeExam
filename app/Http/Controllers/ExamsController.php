@@ -59,8 +59,13 @@ class ExamsController extends Controller
     }
     public function practice($exam_id)
     {
-        $exam = Exam::findOrFail($exam_id);
-        return view('exam.practice', compact('exam'));
+        if (Auth::check())
+        {
+            $exam = Exam::findOrFail($exam_id);
+            return view('exam.practice', compact('exam'));
+        }
+
+        return back();
     }
 
     public function model($exam_id)

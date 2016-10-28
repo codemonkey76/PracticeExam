@@ -44,10 +44,12 @@
                 @endif
             </form>
             <br><br>
-            <a href="/exam/{{ $exam->id }}/practice" class="btn btn-lg btn-primary">Practice Exam</a>
+            @if (Auth::check()) :
+                <a href="/exam/{{ $exam->id }}/practice" class="btn btn-lg btn-primary">Practice Exam</a>
 
-            <br><br>
-            <a href="/exam/{{ $exam->id }}/model" class="btn btn-lg btn-primary">Submit Model Answers</a>
+                <br><br>
+                <a href="/exam/{{ $exam->id }}/model" class="btn btn-lg btn-primary">Submit Model Answers</a>
+            @endif
         </div>
 
     </div>
