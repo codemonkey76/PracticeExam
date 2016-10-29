@@ -10,7 +10,7 @@
                 <?php
                     $index = 1;
                     $letters = range("a", "z");
-                    foreach ($exam->questions()->get()->shuffle() as $question)
+                    foreach ($exam->questions()->get() as $question)
                     {
                         echo sprintf("<li>Q%s. %s</li>",
                                      $index,
@@ -27,7 +27,7 @@
                         }
                         else
                         {
-                            foreach ($question->options()->get()->shuffle() as $option)
+                            foreach ($question->options()->get() as $option)
                             {
                                 // dd($option);
                                 echo sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
