@@ -21,9 +21,11 @@
                         
                         if ($question->options()->get()->count()==0)
                         {
-                            echo sprintf("<input type=\"text\" rows=\"5\" name=\"%s\" value=\"%s\"></input>",
-                                         $question->id,
-                                         $question->model_text);
+                            echo sprintf("<textarea style=\"width: 500px\" name=\"%s\" >",
+                                         $question->id
+                                         );
+                            echo $question->model_text;
+                            echo "</textarea>";
                         }
                         else
                         {
