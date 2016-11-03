@@ -84,20 +84,19 @@ class ExamsController extends Controller
             $results = Results::where('user_id', '=', $user_id)
                 ->where('question_id', '=', $question->id)
                 ->first();
-            //dd($results);
             if ($results == null)
             {
                 $results = new Results;
                 $results->user_id = $user_id;
                 $results->question_id = $question->id;
             }
-
-            if ($question->options()->count()==0)
-                $results->model_text = $request[$question->id];
-            else
-                $results->option_id = $request[$question->id];
-
-            //dd($results);
+            if ($request[$question->id]!=null)
+            {
+                if ($question->options()->count()==0)
+                        $results->model_text = $request[$question->id];
+                else
+                    $results->option_id = $request[$question->id];
+            }
             $results->save();
         }
         flash()->success('Success!', 'Submitted Results');

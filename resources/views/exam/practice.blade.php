@@ -21,9 +21,16 @@
                             ->where('question_id','=',$question->id)->first();
                         if ($question->options()->count()==0)
                         {
-                            echo "<textarea style=\"width: 500px\" name=\"$question->id\" rows=\"5\">";
-                            echo ($results!=null)?$results->model_text:"";
-                            echo "</textarea>";
+                            $output = "<textarea style=\"width: 500px\" name=\"$question->id\" rows=\"5\">";
+                            if ($results != null)
+                                $output = $output . $results->model_text;
+                            $output = $output . "</textarea>";
+                            //var_dump($question->model_text);
+
+                            if ($results != null)
+                                if ($results->model_text != null)
+                                    $output = $output . "<p style=\"color: green\" >Model Text: $question->model_text</p>";
+                            echo $output;
                         }
                         else
                         {
