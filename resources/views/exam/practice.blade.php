@@ -30,9 +30,6 @@
                             $index2 = 0;
                             foreach ($question->options()->get() as $option)
                             {
-                                //dd($results->option_id);
-                                //var_dump($option);
-                                //dd($results);
                                 if ($results==null)
                                 {
                                     $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" > %s<br>",
@@ -49,6 +46,13 @@
                                              $option->id,
                                              ($results->option_id==$option->id)?"checked":"",
                                              $option->option_text);
+                                    if ($results->option_id==$option->id)
+                                    {
+                                        if ($results->option_id==$question->option_id)
+                                            $output = $output . "<br><p style=\"color: green\">&#10004; $option->option_text</p>";
+                                        else
+                                            $output = $output . "<br><p style=\"color: red\">&#10008; $option->option_text</p>";
+                                    }
                                 }
                                 echo $output;
                                 $index2 += 1;

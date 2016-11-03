@@ -53,4 +53,3 @@ Route::get('/exam/{exam_id}/practice', 'ExamsController@practice');
 Route::get('/exam/{exam_id}/model', 'ExamsController@model');
 Route::post('/exam/{exam_id}/results', 'ExamsController@results');
 Route::post('/exam/{exam_id}/answers', 'ExamsController@answers');
-

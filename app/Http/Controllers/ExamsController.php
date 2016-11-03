@@ -101,7 +101,7 @@ class ExamsController extends Controller
             $results->save();
         }
         flash()->success('Success!', 'Submitted Results');
-        return redirect ('/');
+        return back();
     }
     public function answers($exam_id, Request $request)
     {
