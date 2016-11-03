@@ -9,3 +9,4 @@ Homestead.yaml
 composer.lock
 backup-db.sql.gz
 getdb.sh
+refresh.sh
