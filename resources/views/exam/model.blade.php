@@ -21,7 +21,7 @@
                         
                         if ($question->options()->get()->count()==0)
                         {
-                            echo sprintf("<textarea style=\"width: 500px\" name=\"%s\" >",
+                            echo sprintf("<textarea style=\"width: 500px; height: 140px\" name=\"%s\" >",
                                          $question->id
                                          );
                             echo $question->model_text;

@@ -21,7 +21,7 @@
                             ->where('question_id','=',$question->id)->first();
                         if ($question->options()->count()==0)
                         {
-                            $output = "<textarea style=\"width: 500px\" name=\"$question->id\" rows=\"5\">";
+                            $output = "<textarea style=\"width: 500px; height: 140px\" name=\"$question->id\" rows=\"5\">";
                             if ($results != null)
                                 $output = $output . $results->model_text;
                             $output = $output . "</textarea>";
