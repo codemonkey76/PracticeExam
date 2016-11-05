@@ -47,12 +47,16 @@
                                 }
                                 else
                                 {
-                                    $output = sprintf("%s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
+                                    $sql = "select question_id, FLOOR(coalesce(count(case when option_id = $option->id then 1 end)/count(*), 0) * 100) Percentage FROM results GROUP BY question_id HAVING question_id = $option->question_id";
+                                    $res = DB::select($sql);
+                                    $output = sprintf("(%03s%%) %s) <input type=\"radio\" name=\"%s\" value=\"%s\" %s> %s<br>",
+                                             $res[0]->Percentage,
                                              $letters[$index2],
                                              $option->question_id,
                                              $option->id,
                                              ($results->option_id==$option->id)?"checked":"",
                                              $option->option_text);
+                                    
                                     if ($results->option_id==$option->id)
                                     {
                                         if ($results->option_id==$question->option_id)
