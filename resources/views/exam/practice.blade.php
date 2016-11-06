@@ -57,14 +57,21 @@
                                              ($results->option_id==$option->id)?"checked":"",
                                              $option->option_text);
                                     
-                                        if ($results->option_id==$question->option_id)
-                                            $output = $output . "<br><p style=\"color: green\">&#10004; $option->option_text</p>";
-                                        else
-                                        {
+                                
                                             if ($results->option_id==$option->id)
-                                                $output = $output . "<br><p style=\"color: red\">&#10008; $option->option_text</p>";
-                                        }
-                            
+                                            {
+                                                if ($results->option_id==$question->option_id)
+                                                    $output = $output . "<br><p style=\"color: green\">&#10004; $option->option_text</p>";
+                                                else
+                                                    $output = $output . "<br><p style=\"color: red\">&#10008; $option->option_text</p>";
+                                            }
+                                            else
+                                            {
+                                                if ($option->id==$question->option_id)
+                                                    $output = $output . "<br><p style=\"color: green\">&#10004; $option->option_text</p>";
+                                            }
+                                
+                                            
                                 }
                                 echo $output;
                                 $index2 += 1;
