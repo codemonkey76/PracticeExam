@@ -19,6 +19,24 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    @if(Auth::check())
+        <script type="text/javascript">
+            var userID = "{{ Auth::user()->id }}";
+            var userName = "{{ Auth::user()->name }}";
+            var userEmail = "{{ Auth::user()->email }}";
+            //var Tawk_API = Tawk_API || {};
+            // Tawk_API.visitor = {
+            //     name  : userName,
+            //     email : userEmail
+            // };
+            var Tawk_API = Tawk_API || {};
+Tawk_API.visitor = {
+    name  : '<?php echo Auth::user()->name; ?>',
+    email : '<?php echo Auth::user()->email; ?>',
+    hash  : '<?php echo hash_hmac("sha256", Auth::user()->email, "a4d483c0c6fb82e17b34f83b443a692a201e15e6"); ?>'
+};
+        </script>
+    @endif
 </head>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
