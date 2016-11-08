@@ -36,6 +36,7 @@ class ExamsController extends Controller
     }
     public function create()
     {
+        return view('exam.create');
     }
 
     public function store(Request $request)
