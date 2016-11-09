@@ -13,11 +13,11 @@
         </div>
         <div class="col-md-1">
             <div class="row">&nbsp;</div>
-            <div class="row"><button class="form-control">&uarr;</button></div>
-            <div class="row"><button class="form-control">&darr;</button></div>
-            <div class="row"><button class="form-control">&larr;</button></div>
-            <div class="row"><button class="form-control">&rarr;</button></div>
-            <div class="row"><button class="form-control">&#8677;</button></div>
+            <div class="row"><button class="btn btn-default" style="width: 50px">&uarr;</button></div>
+            <div class="row"><button class="btn btn-default" style="width: 50px">&darr;</button></div>
+            <div class="row"><button class="btn btn-default" style="width: 50px">&larr;</button></div>
+            <div class="row"><button class="btn btn-default" style="width: 50px">&rarr;</button></div>
+            <div class="row"><button class="btn btn-default" style="width: 50px">&#8677;</button></div>
         </div>
         <div class="col-md-4">
             Available Questions
@@ -26,9 +26,16 @@
         </div>
         <div class="col-md-1">
             <div class="row">&nbsp;</div>
-            <div class="row"><button class="form-control">Add</button></div>
-            <div class="row"><button class="form-control">Edit</button></div>
-            <div class="row"><button class="form-control">Delete</button></div>
+            <div class="row"><a class="btn btn-default" style="width: 80px" href="exam/1/create">Add</a></div>
+            <div class="row"><button class="btn btn-default" style="width: 80px">Edit</button></div>
+            <div class="row"><a class="btn btn-default" style="width: 80px">Delete</a></div>
+        </div>
+    </div>
+    <div class="row">
+        <div clas="form-group">
+            <button type="button" class="btn btn-lg btn-primary" style="margin: 10px">
+                Save
+            </button>
         </div>
     </div>
 </div>

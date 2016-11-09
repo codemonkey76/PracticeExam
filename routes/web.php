@@ -23,7 +23,7 @@ DELETE      /exam/{id}          @destroy
  */
 Route::resource('exam', 'ExamsController');
 Route::post('getQuestions', 'ExamsController@getQuestions');
-
+Route::post('PracticeExam', 'ExamsController@practiceExam');
 
 /*
 GET         /exam/{id}/question               @index
