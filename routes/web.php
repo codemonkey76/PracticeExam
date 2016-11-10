@@ -3,13 +3,8 @@
 Route::get('', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('contact', 'PagesController@contact');
-// Route::get('/create', 'PagesController@create');
-// Route::post('/create', 'PagesController@store');
-// Route::get('/createQuestions', 'QuestionsController@createQuestions');
-// Route::post('/createQuestions', 'QuestionsController@store');
-Auth::routes();
 
-//Route::get('home', 'HomeController@index');
+Auth::routes();
 
 
 /*
@@ -53,3 +48,5 @@ Route::get('/exam/{exam_id}/practice', 'ExamsController@practice');
 Route::get('/exam/{exam_id}/model', 'ExamsController@model');
 Route::post('/exam/{exam_id}/results', 'ExamsController@results');
 Route::post('/exam/{exam_id}/answers', 'ExamsController@answers');
+
+Route::resource('category', 'CategoryController');

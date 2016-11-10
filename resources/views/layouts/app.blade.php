@@ -109,7 +109,9 @@ s0.parentNode.insertBefore(s1,s0);
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
