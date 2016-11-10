@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exam;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -19,7 +20,9 @@ class PagesController extends Controller
     }
     public function home()
     {
-        return view('pages.home');
+        $exams = Exam::all();
+        
+        return view('pages.home', compact('exams'));
     }
     public function contact()
     {

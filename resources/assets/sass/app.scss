@@ -13,3 +13,15 @@ code {
     font-size: 100%;
     background-color: #f5f8fa;
 }
+
+button {
+    margin: 3px;
+}
+
+.wrapper{
+    overflow-x: hidden;
+    overflow-y: scroll;
+ }
+ .wrapper .selection{
+   border:1px solid #ccc
+ }

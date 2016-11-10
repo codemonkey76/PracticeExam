@@ -16,26 +16,23 @@ class ExamsController extends Controller
         $exams = Exam::all();
         return view('exam.index', compact('exams'));
     }
-    public function getQuestions(Request $request)
+    public function practiceExam(Request $request)
     {
         $exam_id = $request['exams'];
-        
+
         if ($exam_id == null)
             return back();
-        try {
-            $exam = Exam::findOrFail($exam_id);
-        } catch (ModelNotFoundException $e) {
-            return back();
-        }
         
-        return redirect("exam/" . $exam->id . "/question");
+        return redirect("/exam/" . $exam_id . "/practice");
     }
+
     public function show()
     {
         
     }
     public function create()
     {
+        return view('exam.create');
     }
 
     public function store(Request $request)
@@ -59,13 +56,14 @@ class ExamsController extends Controller
     }
     public function practice($exam_id)
     {
-        if (Auth::check())
+        try
         {
             $exam = Exam::findOrFail($exam_id);
             return view('exam.practice', compact('exam'));
+        } catch (Exception $e)
+        {
+            return back();
         }
-
-        return back();
     }
 
     public function model($exam_id)
@@ -73,35 +71,60 @@ class ExamsController extends Controller
         $exam = Exam::findOrFail($exam_id);
         return view('exam.model', compact('exam'));
     }
+    
     public function results($exam_id, Request $request)
     {
-        //Store results against user id and exam id
-        $user_id = Auth::user()->id;
-        $exam = Exam::findOrFail($exam_id);
-
-        foreach ($exam->questions()->get() as $question)
+        $results = [];
+        try
         {
-            $results = Results::where('user_id', '=', $user_id)
-                ->where('question_id', '=', $question->id)
-                ->first();
-            if ($results == null)
+            $exam = Exam::findOrFail($exam_id);
+            $user_id = -1;
+
+            if (Auth::check())
             {
-                $results = new Results;
-                $results->user_id = $user_id;
-                $results->question_id = $question->id;
+                $user_id = Auth::user()->id;
             }
-            if ($request[$question->id]!=null)
+
+            foreach($exam->questions()->get() as $question)
             {
-                if ($question->options()->count()==0)
-                        $results->model_text = $request[$question->id];
-                else
-                    $results->option_id = $request[$question->id];
+                $result = null;
+
+                if ($user_id>=0)
+                {
+                    $result = Results::where('user_id','=',$user_id)
+                        ->where('question_id','=', $question->id)
+                        ->first();
+                }
+
+                if ($result==null)
+                {
+                    $result = new Results;
+                    $result->user_id = $user_id;
+                    $result->question_id = $question->id;
+                }
+
+                if ($request[$question->id]!=null)
+                {
+                    if ($question->options()->count()==0)
+                        $result->model_text = $request[$question->id];
+                    else
+                        $result->option_id = $request[$question->id];
+                }
+
+                if ($result->user_id>=0)
+                    $result->save();
+
+                $results[$question->id] = $result;
             }
-            $results->save();
+            //var_dump($results);
+            flash()->success('Success!', 'Submitted Results');
+            return view('exam.results', compact('results','exam'));
+        } catch (Exception $e)
+        {
+            return back();
         }
-        flash()->success('Success!', 'Submitted Results');
-        return back();
     }
+
     public function answers($exam_id, Request $request)
     {
         $exam = Exam::findOrFail($exam_id);
