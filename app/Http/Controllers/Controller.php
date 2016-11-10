@@ -14,11 +14,4 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    // public function __construct()
-    // {
-    //     $user = Auth::user();
-    //     //$user = User::all();
-    //     View::share('user', $user);
-    //     //View::share('signedIn', $signedIn);
-    // }
 }

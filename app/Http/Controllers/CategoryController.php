@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Category;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -18,6 +19,35 @@ class CategoryController extends Controller
     
     public function create()
     {
-        return view('category.create');
+        if (!Auth::check())
+            return back();
+
+        if (Auth::user()->can('create', Category::class))
+        {
+            $categories = Category::where('parent_id','=',null)->get();
+            //dd('categories');
+            //dd('Categories = ' . $categories);
+            //dd($categories);
+            return view('category.create', compact('categories'));
+        }
+
+        return back();
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:categories|max:255',
+        ]);
+        
+        // dd($request->all());
+        $category = new Category($request->all());
+        
+        $category->save();
+        
+        flash()->success('Success!', 'Category saved successfully');
+        return back();
+
+        
     }
 }

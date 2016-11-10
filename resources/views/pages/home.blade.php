@@ -9,6 +9,6 @@
             @include('your-exams')
             @include('all-exams')
     </div>
-    
+    <a class="btn btn-primary" href="/category/create">Create Category</a>
 </div>
 @stop
