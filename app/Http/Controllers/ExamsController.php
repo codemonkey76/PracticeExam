@@ -25,7 +25,11 @@ class ExamsController extends Controller
         
         return redirect("/exam/" . $exam_id . "/practice");
     }
-
+    public function getQuestions(Request $request)
+    {
+        $exam_id = $request['exams'];
+        return redirect("/exam/" . $exam_id . "/question");
+    }
     public function show()
     {
         
