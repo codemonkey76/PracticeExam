@@ -118,7 +118,7 @@ s0.parentNode.insertBefore(s1,s0);
     <script src="/js/libs.js"></script>
     @include('flash')
     <script src="/js/app.js"></script>
-    <script src="/js/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="{{ URL::asset('js/vendor/tinymce/js/tinymce/tinymce.min.js') }}"></script>
     <script>
         var editor_config = {
             path_absolute : "{{ URL::to('/') }}/",
