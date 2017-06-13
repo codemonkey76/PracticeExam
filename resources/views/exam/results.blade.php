@@ -26,11 +26,12 @@
                         {
                             $output = "<textarea style=\"width: 500px; height: 140px\" name=\"$question->id\" rows=\"5\">";
                             if ($results != null)
-                                $output = $output . $results->model_text;
+                                if ($results[$question->id]!=null)
+                                    $output = $output . $results[$question->id]->model_text;
                             $output = $output . "</textarea>";
                             
                             if ($results != null)
-                                if ($results->model_text != null)
+                                if ($results[$question->id]->model_text != null)
                                     $output = $output . "<p style=\"color: green\" >Model Text: $question->model_text</p>";
                             echo $output;
                         }
@@ -113,7 +114,10 @@
                                         <td>{{ $correct }}</td>
                                         <td>{{ $incorrect }}</td>
                                         <td>{{ $unanswered }}</td>
-                                        <td>{{ round(($correct / ($correct+$incorrect+$unanswered))*100).'%' }}</td>
+                                        <td><?php
+                                         if (($correct+$incorrect+$unanswered)>0)
+                                            round(($correct / ($correct+$incorrect+$unanswered))*100).'%'
+                                        ?></td>
                                     </tr>
                                 </table>
                             </div>
