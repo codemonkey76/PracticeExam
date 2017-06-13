@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/libs.css" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -38,6 +39,7 @@ Tawk_API.visitor = {
         </script>
     @endif
 </head>
+<!--<script src="{{ asset('js/summernote.js') }}"></script> //-->
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -116,5 +118,21 @@ s0.parentNode.insertBefore(s1,s0);
     <script src="/js/libs.js"></script>
     @include('flash')
     <script src="/js/app.js"></script>
+    <script src="{{ URL::to('js/vendor/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+    <script>
+        var editor_config = {
+            path_absolute : "{{ URL::to('/') }}/",
+            selector: "textarea",
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern'
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            relative_urls: false
+        };
+        tinymce.init(editor_config);
+    </script>
 </body>
 </html>

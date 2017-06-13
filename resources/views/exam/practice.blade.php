@@ -25,11 +25,12 @@
                         }
                         if ($question->options()->count()==0)
                         {
+                            // $output = "<div id=\"summernote\">" . "Test" . "</div>";
                             $output = "<textarea style=\"width: 500px; height: 140px\" name=\"$question->id\" rows=\"5\">";
                             if ($results != null)
                                 $output = $output . $results->model_text;
                             $output = $output . "</textarea>";
-                            //var_dump($question->model_text);
+                            // $output = $output . "</div>";
 
                             if ($results != null)
                                 if ($results->model_text != null)

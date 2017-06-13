@@ -29,7 +29,6 @@
                                 if ($results[$question->id]!=null)
                                     $output = $output . $results[$question->id]->model_text;
                             $output = $output . "</textarea>";
-                            
                             if ($results != null)
                                 if ($results[$question->id]->model_text != null)
                                     $output = $output . "<p style=\"color: green\" >Model Text: $question->model_text</p>";
