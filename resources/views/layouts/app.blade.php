@@ -130,6 +130,7 @@ s0.parentNode.insertBefore(s1,s0);
                 'emoticons template paste textcolor colorpicker textpattern'
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            file_browser_callback_types: 'file image media',
             relative_urls: false
         };
         tinymce.init(editor_config);
